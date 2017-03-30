@@ -55,6 +55,7 @@ package SOMETH;
 	        // 3. 创建一封邮件
 	        MimeMessage message = createMimeMessage(session, myEmailAccount, receiveMailAccount);
 
+	        
 	        // 4. 根据 Session 获取邮件传输对象
 	        Transport transport = session.getTransport();
 
@@ -94,12 +95,22 @@ package SOMETH;
 	        // 1. 创建一封邮件
 	        MimeMessage message = new MimeMessage(session);
 
+
 	        // 2. From: 发件人
 	        message.setFrom(new InternetAddress(sendMail, "某宝网", "UTF-8"));
 
 	        // 3. To: 收件人（可以增加多个收件人、抄送、密送）
 	        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "XX用户", "UTF-8"));
-
+//	        
+//	        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress("cc@receive.com", "USER_CC", "UTF-8"));
+//	        //    To: 增加收件人（可选）
+//	        message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress("dd@receive.com", "USER_DD", "UTF-8"));
+//	        //    Cc: 抄送（可选）
+//	        message.setRecipient(MimeMessage.RecipientType.CC, new InternetAddress("ee@receive.com", "USER_EE", "UTF-8"));
+//	        //    Bcc: 密送（可选）
+//	        message.setRecipient(MimeMessage.RecipientType.BCC, new InternetAddress("ff@receive.com", "USER_FF", "UTF-8"));
+//	        
+	        
 	        // 4. Subject: 邮件主题
 	        message.setSubject("打折钜惠", "UTF-8");
 
