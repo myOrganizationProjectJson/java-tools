@@ -1,4 +1,4 @@
-package SOMETH;
+package st.tool;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +24,6 @@ public class HttpRequestor {
     private Integer socketTimeout = null;
     private String proxyHost = null;
     private Integer proxyPort = null;
-    private String sessionId="";
     
     /**
      * Do GET request
@@ -88,7 +87,7 @@ public class HttpRequestor {
      * @return
      * @throws Exception 
      */
-    public String doPost(String url, Map parameterMap ,String sessionids) throws Exception {
+    public String doPost(String url, Map parameterMap ) throws Exception {
     	String keys = "";
 		String cookieVal = "";
 	
@@ -119,25 +118,20 @@ public class HttpRequestor {
         
         URLConnection connection = openConnection(localURL);
         HttpURLConnection httpURLConnection = (HttpURLConnection)connection;
-        
         httpURLConnection.setDoOutput(true);
         httpURLConnection.setRequestMethod("POST");
         httpURLConnection.setRequestProperty("Accept-Charset", charset);
         httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         httpURLConnection.setRequestProperty("Content-Length", String.valueOf(parameterBuffer.length()));
-    	
-        if(!sessionids.equals("")){
-        	System.out.println("================");
-			connection.setRequestProperty("Cookie", sessionId);
-		}else{
         
-	    	for(int i=1;(keys=httpURLConnection.getHeaderField(i))!=null;i++){
-				cookieVal = httpURLConnection.getHeaderField(i);
-				cookieVal = cookieVal.substring(0,cookieVal.indexOf(";")>-1?cookieVal.indexOf(";"):cookieVal.length()-1);
-				sessionId = sessionId + cookieVal + ";";
-			}
-		}
-    	System.out.println(sessionId);
+        System.out.println("=========if you need put some cookies=======");
+        connection.setRequestProperty("Cookie", "cookie content");
+        
+//	    	for(int i=1;(keys=httpURLConnection.getHeaderField(i))!=null;i++){
+//				cookieVal = httpURLConnection.getHeaderField(i);
+//				cookieVal = cookieVal.substring(0,cookieVal.indexOf(";")>-1?cookieVal.indexOf(";"):cookieVal.length()-1);
+//				sessionId = sessionId + cookieVal + ";";
+        
         
         OutputStream outputStream = null;
         OutputStreamWriter outputStreamWriter = null;
@@ -153,11 +147,9 @@ public class HttpRequestor {
             
             outputStreamWriter.write(parameterBuffer.toString());
             outputStreamWriter.flush();
-            
             if (httpURLConnection.getResponseCode() >= 300) {
                 throw new Exception("HTTP Request is not success, Response code is " + httpURLConnection.getResponseCode());
             }
-            
             inputStream = httpURLConnection.getInputStream();
             inputStreamReader = new InputStreamReader(inputStream);
             reader = new BufferedReader(inputStreamReader);
@@ -166,40 +158,22 @@ public class HttpRequestor {
                 resultBuffer.append(tempLine);
             }
             
-            System.out.println(resultBuffer.toString());
-            
-            
         }catch(Exception e){
-        	System.out.println(e);
-        	System.out.println(sessionId);
-        	
         	   if (outputStreamWriter != null) {
                    outputStreamWriter.close();
                }
-               
                if (outputStream != null) {
                    outputStream.close();
                }
-               
                if (reader != null) {
                    reader.close();
                }
-               
                if (inputStreamReader != null) {
                    inputStreamReader.close();
                }
-               
                if (inputStream != null) {
                    inputStream.close();
                }
-               
-             System.out.println("yibangshabi");
-            Map dataMap = new HashMap();
-            dataMap.put("username", "Nick Huang");
-            dataMap.put("blog", "IT");
-            
-            doPost("http://www.ddf.com/index.php?s=/Index_test", dataMap,sessionId);
-            
         } finally {
             
             if (outputStreamWriter != null) {
@@ -306,10 +280,10 @@ public static void main(String[] args) throws Exception {
         Map dataMap = new HashMap();
         dataMap.put("username", "Nick Huang");
         dataMap.put("blog", "IT");
-        System.out.println(new HttpRequestor().doPost("http://www.ddf.com/index.php?s=/Index_test", dataMap,""));
+        System.out.println(new HttpRequestor().doPost("http://www.test.com/index.php?s=/Index_test", dataMap));
         
         /* Get Request */
-     //   System.out.println(new HttpRequestor().doGet("http://www.ddf.com/index.php?s=/Index_test"));
+     //   System.out.println(new HttpRequestor().doGet("http://www.test.com/index.php?s=/Index_test"));
     }
 
 }
