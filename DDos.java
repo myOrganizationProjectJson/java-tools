@@ -23,9 +23,9 @@ class Mythread implements Runnable {
     public void run() {  
         while (true) {  
             try {  
-                URL url = new URL("http://www.sanyecao.com/");  
+                URL url = new URL("http://www.xxx.com/");  
                 URLConnection conn = url.openConnection();  
-                System.out.println("·¢°ü³É¹¦£¡");  
+                System.out.println("Â·Â¢Â°Ã¼Â³Ã‰Â¹Â¦Â£Â¡");  
                 BufferedInputStream bis = new BufferedInputStream(  
                         conn.getInputStream());  
                 byte[] bytes = new byte[1024];  
@@ -36,7 +36,7 @@ class Mythread implements Runnable {
                 if (bis != null) {  
                     if ((len = bis.read()) != -1) {  
                         sb.append(new String(bytes, 0, len));  
-                        System.out.println("¹¥»÷³É¹¦£¡");  
+                        System.out.println("Â¹Â¥Â»Ã·Â³Ã‰Â¹Â¦Â£Â¡");  
                         bis.close();  
                     }  
                 }  
