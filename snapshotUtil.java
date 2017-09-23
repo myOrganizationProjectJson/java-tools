@@ -48,12 +48,17 @@ public class snapshotUtil {
     	
     	SimpleDateFormat dfdir = new SimpleDateFormat("yyyyMMdd");//设置日期格式
     	
+    	SimpleDateFormat dfdirH = new SimpleDateFormat("HH");//设置日期格式
+    	
     	String dir = "E:\\\\snapshot\\\\";
     	
-    	String path = dir+dfdir.format(new Date());
+    	String path = dir+dfdir.format(new Date())+"\\\\"+dfdirH.format(new Date());
     	if(!new File(path).exists())   {
     	    new File(path).mkdirs();
     	}
+    	
+    	
+    	
     	for(GraphicsDevice curGs : gs){
             i++;
     		GraphicsConfiguration[] gc = curGs.getConfigurations();
