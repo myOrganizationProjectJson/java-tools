@@ -25,6 +25,7 @@ class Mythread implements Runnable {
             try {  
                 URL url = new URL("http://www.xxx.com/");  
                 URLConnection conn = url.openConnection();  
+                conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Linux X; DigExt)");
                 System.out.println("发包成功");  
                 BufferedInputStream bis = new BufferedInputStream(  
                         conn.getInputStream());  
